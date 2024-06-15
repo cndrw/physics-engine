@@ -18,8 +18,10 @@ struct AABB // Alix Aligned Bounding Box
 
 struct Transform
 {
+    public:
+    Vec2 pos;
+
     private:
-    Vec2 m_position;
     AABB m_bbox;
     int16_t m_angle = 0; // 0° is to the rigth
 };

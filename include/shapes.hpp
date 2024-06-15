@@ -5,10 +5,14 @@
 
 namespace pe {
 
-struct Circle
+class Circle : public Transform
 {
-    float m_radius = 0;
+    public:
+    Circle(Vec2 pos, float radius);
+
+    private:
     Vec2 m_pos;
+    float m_radius;
 };
 };
 

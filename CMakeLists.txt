@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 project(physics_engine)
 
 set(CMAKE_CXX_STANDARD 17)
-add_compile_options(-Wall -Wextra -pedantic -O0)
+# add_compile_options(-Wall -Wextra -pedantic -O0)
 
 include(FetchContent)
 set(FETCHCONTENT_QUIET FALSE)
@@ -25,10 +25,16 @@ file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/s
 # Declaring our executable
 add_executable(${PROJECT_NAME}
         include/scene.hpp
-        include/shape.hpp
+        include/shapes.hpp
         include/transform.hpp
         include/engine.hpp
-        include/engine.hpp)
+        include/engine.hpp
+        src/engine.cpp
+        src/engine.cpp
+        src/scene.cpp
+        src/scene.cpp
+        src/shapes.cpp
+        src/shapes.cpp)
 target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)

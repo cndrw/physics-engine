@@ -25,9 +25,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67012e3-b7d5-42fd-adbc-dfc9f4d99848" name="Changes" comment="init projects">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/engine.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/engine.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/scene.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/scene.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/shape.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/shapes.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/transform.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/transform.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,6 +98,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
@@ -102,7 +108,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.fileTypes",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C++",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -113,9 +119,9 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.physics_engine">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="glfw" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="physics_engine" TARGET_NAME="glfw" CONFIG_NAME="Debug">
@@ -161,6 +167,7 @@
       <updated>1718381233106</updated>
       <workItem from="1718381234559" duration="1562000" />
       <workItem from="1718391874190" duration="4701000" />
+      <workItem from="1718473275648" duration="5206000" />
     </task>
     <servers />
   </component>
