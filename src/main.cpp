@@ -4,9 +4,11 @@
 #include <iostream>
 #include <thread>
 
+#include "engine.hpp"
+
 auto last_time = std::chrono::system_clock::now();
 
-void draw_fps()
+void draw_fps() noexcept
 {
     const auto now = std::chrono::system_clock::now();
     const auto delta_s = std::chrono::duration<double>(now - last_time).count();
@@ -19,6 +21,7 @@ void draw_fps()
 
 int main()
 {
+    pe::Engine engine;
     InitWindow(800, 450, "pyhsics-engine");
 
     while (!WindowShouldClose())
