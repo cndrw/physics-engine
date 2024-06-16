@@ -25,9 +25,7 @@ void Engine::draw_fps()
 void Engine::update()
 {
     draw_fps();
-
     m_scene.update();
-
 }
 
 void Engine::set_time_scale(float time_scale)

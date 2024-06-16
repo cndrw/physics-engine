@@ -11,14 +11,7 @@ namespace chr = std::chrono;
 
 class Engine final
 {
-    private:
-    Scene m_scene;
-    float m_time_scale = 1.0;
-    chr::system_clock::time_point m_last_frame;
-
-
-
-    public:
+public:
     Engine();
     void create_scene() const;
     void update();
@@ -26,6 +19,11 @@ class Engine final
 
     private:
     void draw_fps();
+
+private:
+    Scene m_scene;
+    chr::system_clock::time_point m_last_frame;
+    float m_time_scale = 1.0;
 };
 
 }

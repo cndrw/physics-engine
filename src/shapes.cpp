@@ -7,4 +7,9 @@ Circle::Circle(const Vec2 pos, const float radius)
 {
 }
 
+Rectangle::Rectangle(const float width, const float height)
+    : width(width), height(height)
+{
+}
+
 }

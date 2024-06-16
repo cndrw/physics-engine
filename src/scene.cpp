@@ -1,29 +1,26 @@
 #include "scene.hpp"
-#include <iostream>
+
 #include "shapes.hpp"
+#include "rigidbody.hpp"
 
 namespace pe {
 
 Scene::Scene()
 {
-    m_objects.push_back(Circle({10, 10} ,4));
+    pe::Rectangle r(100, 100);
+    m_objects.emplace_back(r);
+    m_objects[0].add_force({1, 0}, 0.1);
 }
 
 void Scene::update()
 {
-    // will be optimized in the future
-    for (auto& first : m_objects)
+    // update all objects
+    for (auto& obj : m_objects)
     {
-        first.pos.x++;
-        for (auto& second : m_objects)
-        {
-            if(detect_collison(first, second))
-            {
-                std::cout << "Objects colliding\n";
-                first.pos.x--;
-            }
-        }
+        obj.update();
     }
+
+    // will be optimized in the future
 }
 
 bool Scene::detect_collison(const Transform &obj1, const Transform &obj2)
