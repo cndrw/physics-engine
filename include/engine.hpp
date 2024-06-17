@@ -17,12 +17,14 @@ public:
     void update();
     void set_time_scale(float time_scale);
 
-    private:
+private:
     void draw_fps();
 
 private:
     Scene m_scene;
     chr::system_clock::time_point m_last_frame;
+    chr::system_clock::time_point m_last_physics_frame;
+    chr::milliseconds dt;
     float m_time_scale = 1.0;
 };
 

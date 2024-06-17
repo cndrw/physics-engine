@@ -22,6 +22,7 @@ public:
 
 public:
     Rectangle(float width, float height);
+    void draw(Vec2 pos) const;
 };
 };
 

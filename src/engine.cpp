@@ -1,13 +1,18 @@
 #include <chrono>
 #include <string>
+#include <iostream>
 #include "raylib.h"
 
 #include "engine.hpp"
 
+namespace chr = std::chrono;
+
 namespace pe {
 
 Engine::Engine()
-    : m_last_frame(std::chrono::system_clock::now())
+    : m_last_frame(chr::system_clock::now()),
+      m_last_physics_frame(chr::system_clock::now()),
+      dt{10}
 {
 }
 
@@ -26,9 +31,18 @@ void Engine::update()
 {
     draw_fps();
     m_scene.update();
+
+    const auto now = chr::system_clock::now();
+    if (now - m_last_physics_frame >= dt)
+    {
+        m_scene.update_physics();
+        m_last_physics_frame = now;
+    }
+
+    m_scene.late_update();
 }
 
-void Engine::set_time_scale(float time_scale)
+void Engine::set_time_scale(const float time_scale)
 {
     m_time_scale = time_scale;
 }

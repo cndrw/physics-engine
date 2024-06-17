@@ -9,15 +9,20 @@ namespace pe {
 class RigidBody : public Transform
 {
 public:
-    explicit RigidBody(const Rectangle& rect);
+    RigidBody(const Rectangle& rect, float mass);
     void move(const Vec2 dir) { pos += dir; };
     void update();
     void add_force(Vec2 dir, float strength);
     void add_impulse(Vec2 dir, float stength);
+    void draw() const;
+
+private:
+    void add_gravity();
 
 private:
     Rectangle m_shape;
     Vec2 m_force;
+    float m_mass;
 };
 
 }
