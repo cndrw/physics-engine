@@ -33,9 +33,10 @@ void Engine::update()
     m_scene.update();
 
     const auto now = chr::system_clock::now();
-    if (now - m_last_physics_frame >= dt)
+    const chr::duration<float> curr_dt = now - m_last_physics_frame;
+    if (curr_dt >= dt)
     {
-        m_scene.update_physics();
+        m_scene.update_physics(curr_dt.count());
         m_last_physics_frame = now;
     }
 

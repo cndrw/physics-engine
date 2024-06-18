@@ -1,5 +1,6 @@
 #include "transform.hpp"
 
+#include <stdexcept>
 #include <valarray>
 
 
@@ -12,11 +13,25 @@ Vec2& Vec2::operator+=(const Vec2& other)
     return *this;
 }
 
-Vec2& Vec2::operator*(const float val)
+Vec2 Vec2::operator/( const float val) const
 {
-    this->x *= val;
-    this->x *= val;
-    return *this;
+    if (val == 0)
+    {
+        throw std::invalid_argument("Can't divide Vec2 by zero.");
+    }
+
+    Vec2 res = *this;
+    res.x /= val;
+    res.y /= val;
+    return res;
+}
+
+Vec2 Vec2::operator*(const float val) const
+{
+    Vec2 res = *this;
+    res.x *= val;
+    res.y *= val;
+    return res;
 }
 
 [[nodiscard]]

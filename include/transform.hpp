@@ -11,8 +11,9 @@ struct Vec2
 
     [[nodiscard]]
     Vec2 normalized() const;
-    Vec2& operator*(float val);
+    Vec2 operator*(float val) const;
     Vec2& operator+=(const Vec2& other);
+    Vec2 operator/(float val) const;
 };
 
 struct AABB // Alix Aligned Bounding Box

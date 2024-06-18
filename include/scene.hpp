@@ -14,7 +14,7 @@ public:
     void add_object(const Transform& obj);
     void remove_object(const Transform& obj);
     void clear_scene();
-    void update_physics();
+    void update_physics(float dt);
     void late_update();
     void update();
     bool detect_collison(const Transform& obj1, const Transform& obj2);

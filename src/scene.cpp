@@ -10,7 +10,7 @@ Scene::Scene()
     pe::Rectangle r(100, 100);
     RigidBody rb(r, 50);
     m_objects.push_back(rb);
-    m_objects[0].add_force({1, 0}, 0.1);
+    m_objects[0].add_force({1, 0}, 500);
 }
 
 void Scene::update()
@@ -18,13 +18,13 @@ void Scene::update()
     // update all objects
 
     // will be optimized in the future
+}
+void Scene::update_physics(const float dt)
+{
     for (auto& obj : m_objects)
     {
-        obj.update();
+        obj.update(dt);
     }
-}
-void Scene::update_physics()
-{
 }
 
 void Scene::late_update()
