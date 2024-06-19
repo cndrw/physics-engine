@@ -7,10 +7,10 @@ namespace pe {
 
 Scene::Scene()
 {
-    pe::Rectangle r(100, 100);
+    pe::Rectangle r(50, 50);
     RigidBody rb(r, 50);
     m_objects.push_back(rb);
-    m_objects[0].add_force({1, 0}, 500);
+    m_objects[0].add_force({1, 0}, 50);
 }
 
 void Scene::update()

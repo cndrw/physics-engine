@@ -6,7 +6,7 @@
 
 namespace pe {
 
-class RigidBody : public Transform
+class RigidBody
 {
 public:
     RigidBody(const Rectangle& rect, float mass);
@@ -21,6 +21,8 @@ private:
 
 private:
     Rectangle m_shape;
+    Transform curr_tf{};
+    Transform last_tf{};
     Vec2 m_force;
     float m_mass;
 };

@@ -14,6 +14,8 @@ struct Vec2
     Vec2 operator*(float val) const;
     Vec2& operator+=(const Vec2& other);
     Vec2 operator/(float val) const;
+    Vec2 operator+(const Vec2& other) const;
+    Vec2 operator-(const Vec2& rhs) const;
 };
 
 struct AABB // Alix Aligned Bounding Box

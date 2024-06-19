@@ -34,6 +34,22 @@ Vec2 Vec2::operator*(const float val) const
     return res;
 }
 
+Vec2 Vec2::operator+(const Vec2& other) const
+{
+    Vec2 res = *this;
+    res.x += other.x;
+    res.y += other.y;
+    return res;
+}
+
+Vec2 Vec2::operator-(const Vec2& other) const
+{
+    Vec2 res = *this;
+    res.x -= other.x;
+    res.y -= other.y;
+    return res;
+}
+
 [[nodiscard]]
 Vec2 Vec2::normalized() const
 {
