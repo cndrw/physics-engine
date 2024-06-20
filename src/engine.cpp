@@ -5,6 +5,8 @@
 
 #include "engine.hpp"
 
+#include <memory>
+
 namespace chr = std::chrono;
 
 namespace pe {
@@ -29,7 +31,15 @@ void Engine::draw_fps()
 
 void Engine::update()
 {
-    draw_fps();
+    const auto mouse_pos = GetMousePosition();
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && mouse_pos.x <= 50 && mouse_pos.y <= 50)
+    {
+        Rectangle r(50, 50);
+        auto rb = std::make_shared<RigidBody>(r, 50);
+        m_scene.add_object(rb);
+    }
+
+
     m_scene.update();
 
     const auto now = chr::system_clock::now();
@@ -41,6 +51,7 @@ void Engine::update()
     }
 
     m_scene.late_update();
+    draw_fps();
 }
 
 void Engine::set_time_scale(const float time_scale)

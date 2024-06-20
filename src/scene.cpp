@@ -1,5 +1,7 @@
 #include "scene.hpp"
 
+#include <memory>
+
 #include "shapes.hpp"
 #include "rigidbody.hpp"
 
@@ -10,7 +12,8 @@ Scene::Scene()
     pe::Rectangle r(50, 50);
     RigidBody rb(r, 50);
     m_objects.push_back(rb);
-    m_objects[0].add_force({1, 0}, 50);
+    m_solver.add_force(m_objects[0], {1, 0}, 50);
+    m_solver.add_gravity(m_objects[0]);
 }
 
 void Scene::update()
@@ -23,18 +26,23 @@ void Scene::update_physics(const float dt)
 {
     for (auto& obj : m_objects)
     {
-        obj.update(dt);
+        m_solver.update(obj, dt);
     }
 }
 
 void Scene::late_update()
 {
-    for (auto& obj : m_objects)
+    for (const auto& obj : m_objects)
     {
-        obj.draw();
+        obj.shape.draw(obj.curr_tf.pos);
     }
 }
 
+void Scene::add_object(const std::shared_ptr<RigidBody>& rb)
+{
+    m_solver.add_gravity(*rb);
+    m_objects.push_back(*rb);
+}
 
 
 bool Scene::detect_collison(const Transform &obj1, const Transform &obj2)

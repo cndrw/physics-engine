@@ -4,6 +4,8 @@
 #include <vector>
 #include "transform.hpp"
 #include "rigidbody.hpp"
+#include "solver.hpp"
+#include <memory>
 
 namespace pe {
 
@@ -11,8 +13,8 @@ class Scene final
 {
 public:
     Scene();
-    void add_object(const Transform& obj);
-    void remove_object(const Transform& obj);
+    void add_object(const std::shared_ptr<RigidBody>& rb);
+    void remove_object(const RigidBody& obj);
     void clear_scene();
     void update_physics(float dt);
     void late_update();
@@ -21,6 +23,7 @@ public:
 
 private:
     std::vector<RigidBody> m_objects;
+    Solver m_solver;
 };
 
 }
