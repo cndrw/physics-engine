@@ -16,6 +16,10 @@ Engine::Engine()
       m_last_physics_frame(chr::system_clock::now()),
       dt{10}
 {
+    m_ui_handler.add_button({10, 10}, 25, 25, RED, [&]()
+    {
+        m_scene.construct_shape();
+    });
 }
 
 void Engine::draw_fps()
@@ -31,15 +35,8 @@ void Engine::draw_fps()
 
 void Engine::update()
 {
-    const auto mouse_pos = GetMousePosition();
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && mouse_pos.x <= 50 && mouse_pos.y <= 50)
-    {
-        Rectangle r(50, 50);
-        auto rb = std::make_shared<RigidBody>(r, 50);
-        m_scene.add_object(rb);
-    }
 
-
+    m_ui_handler.update();
     m_scene.update();
 
     const auto now = chr::system_clock::now();

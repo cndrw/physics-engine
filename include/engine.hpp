@@ -4,6 +4,7 @@
 
 #include <chrono>
 #include "scene.hpp"
+#include "ui_handler.hpp"
 
 namespace  pe {
 
@@ -22,6 +23,7 @@ private:
 
 private:
     Scene m_scene;
+    UIHandler m_ui_handler;
     chr::system_clock::time_point m_last_frame;
     chr::system_clock::time_point m_last_physics_frame;
     chr::milliseconds dt;

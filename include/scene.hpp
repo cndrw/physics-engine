@@ -13,6 +13,7 @@ class Scene final
 {
 public:
     Scene();
+    void construct_shape();
     void add_object(const std::shared_ptr<RigidBody>& rb);
     void remove_object(const RigidBody& obj);
     void clear_scene();

@@ -5,9 +5,10 @@
 // 100px == 1m
 
 // TODO:
+// implement arena for scene object
+// shape construction not working atm -> std::async not really working out (tend for own architecture for handling with this input)
 // interpolation and more robust fixed time system?
 // first (some?) dt that arrive for rigidbody are way out of scale (should be around 0.01s)
-// more sophisticatied ground constrain
 // better solution with transform (maybe?)
 
 int main()
@@ -21,7 +22,6 @@ int main()
         ClearBackground(RAYWHITE);
         engine.update();
         DrawRectangle(0, 400, 800, 100, BLUE);
-        DrawRectangle(0, 0, 50, 50, ORANGE);
         EndDrawing();
     }
 

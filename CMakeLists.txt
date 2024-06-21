@@ -27,7 +27,10 @@ add_executable(${PROJECT_NAME}
         include/solver.hpp
         include/solver.hpp
         src/solver.cpp
-        src/solver.cpp)
+        src/solver.cpp
+        src/ui_handler.cpp
+        include/ui_handler.hpp
+        include/ui_handler.hpp)
 #[[
         include/scene.hpp
         include/shapes.hpp
