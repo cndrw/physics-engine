@@ -18,7 +18,7 @@ Engine::Engine()
 {
     m_ui_handler.add_button({10, 10}, 25, 25, RED, [&]()
     {
-        m_scene.construct_shape();
+        m_scene.construct_body();
     });
 }
 

@@ -9,23 +9,29 @@
 #include "raylib.h"
 #include "shapes.hpp"
 #include "rigidbody.hpp"
+#include "ui_handler.hpp"
 
 using namespace std::chrono_literals;
 
 namespace pe {
 
     Scene::Scene()
+        : m_construction_rect({0, 0}, {0, 0}, 50)
     {
-        pe::Rectangle r(50, 50);
-        RigidBody rb(r, 50);
-        m_objects.push_back(rb);
-        m_solver.add_force(m_objects[0], {1, 0}, 50);
-        m_solver.add_gravity(m_objects[0]);
+        // pe::Rectangle r(50, 50);
+        // RigidBody rb(r, {0, 0}, 50);
+        // m_objects.push_back(rb);
+        // m_solver.add_force(m_objects[0], {1, 0}, 50);
+        // m_solver.add_gravity(m_objects[0]);
     }
 
     void Scene::update()
     {
         // update all objects
+        if (m_constructor.construct)
+        {
+            construct_body_handler();
+        }
 
         // will be optimized in the future
     }
@@ -33,6 +39,7 @@ namespace pe {
     {
         for (auto& obj : m_objects)
         {
+            std::cout << obj.force << std::endl;
             m_solver.update(obj, dt);
         }
     }
@@ -47,48 +54,48 @@ namespace pe {
 
     void Scene::add_object(const std::shared_ptr<RigidBody>& rb)
     {
-        std::cout << "obj addeca\n";
+        std::cout << "added object\n";
+        std::cout << rb->curr_tf.pos << std::endl;
         m_solver.add_gravity(*rb);
+        std::cout << "with foce " << rb->force << std::endl;
         m_objects.push_back(*rb);
     }
 
-    void Scene::construct_shape()
+    void Scene::construct_body()
     {
-        auto f = std::async([&]()
+       m_constructor.construct = true;
+    }
+
+    void Scene::construct_body_handler()
+    {
+        m_constructor.construct = true;
+        const auto mouse_pressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        switch (m_construct_state)
         {
-            Vector2 first_click, second_click;
-            while (true)
-            {
-                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+            case 0:
+                m_construct_state++;
+                std::cout << "state 0\n";
+                break;
+            case 1:
+                if (mouse_pressed)
                 {
-                    std::cout << "first click\n";
-                    first_click = GetMousePosition();
-                    break;
+                    std::cout << "state 1\n";
+                    m_constructor.first_pos = UIHandler::GetMousePos();
+                    m_construct_state++;
                 }
-                std::this_thread::sleep_for(0.1s);
-            }
-
-            std::this_thread::sleep_for(1s);
-
-            while (true)
-            {
-                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+                break;
+            case 2:
+                if (mouse_pressed)
                 {
-                    std::cout << "second click\n";
-                    second_click = GetMousePosition();
-                    break;
+                    m_constructor.second_pos = UIHandler::GetMousePos();
+                    add_object(m_constructor.init());
+                    m_constructor.construct = false;
+                    m_construct_state = 0;
                 }
-                std::this_thread::sleep_for(0.1s);
-            }
-
-            float width = std::abs(second_click.x - first_click.x);
-            float height = std::abs(second_click.y - first_click.y);
-            Rectangle r(width, height);
-            auto rb = std::make_shared<RigidBody>(r, 50);
-            rb->curr_tf.pos.x = first_click.x;
-            rb->curr_tf.pos.y = first_click.y;
-            add_object(rb);
-        });
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -96,5 +103,13 @@ namespace pe {
     {
         return true;
     }
+
+    std::unique_ptr<RigidBody> Scene::RigidbodyConstructor::init() const
+    {
+        const auto [width, height] = second_pos - first_pos;
+        Rectangle rect(width, height);
+        return std::make_unique<RigidBody>(rect, first_pos, 50);
+    }
+
 
 }

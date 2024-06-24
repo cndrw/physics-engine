@@ -23,6 +23,13 @@ namespace pe {
         draw_ui();
     }
 
+    Vec2 UIHandler::GetMousePos()
+    {
+        const auto raylib_pos = GetMousePosition();
+        return {raylib_pos.x, raylib_pos.y};
+    }
+
+
     bool UIHandler::clicked_button(const Button &button, const Vector2 mpos) const
     {
         return mpos.x >= button.pos.x && mpos.x <= (button.pos.x + button.width) &&

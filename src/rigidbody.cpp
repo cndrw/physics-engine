@@ -12,10 +12,12 @@
 
 namespace pe {
 
-RigidBody::RigidBody(const Rectangle shape, const float mass)
-    : shape(shape), mass(mass)
-{
-}
+    RigidBody::RigidBody(const Rectangle shape, const Vec2 pos, const float mass)
+        : shape(shape), mass(mass)
+    {
+        curr_tf.pos = pos;
+        last_tf.pos = pos;
+    }
 
 }
 
