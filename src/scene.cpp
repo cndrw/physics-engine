@@ -4,6 +4,7 @@
 #include <memory>
 #include <thread>
 #include <chrono>
+#include <engine.hpp>
 #include <iostream>
 
 #include "raylib.h"
@@ -28,7 +29,7 @@ namespace pe {
     void Scene::update()
     {
         // update all objects
-        if (m_constructor.construct)
+        if (m_constructor.active_construct)
         {
             construct_body_handler();
         }
@@ -39,7 +40,6 @@ namespace pe {
     {
         for (auto& obj : m_objects)
         {
-            std::cout << obj.force << std::endl;
             m_solver.update(obj, dt);
         }
     }
@@ -63,34 +63,36 @@ namespace pe {
 
     void Scene::construct_body()
     {
-       m_constructor.construct = true;
+       m_constructor.active_construct = true;
     }
 
     void Scene::construct_body_handler()
     {
-        m_constructor.construct = true;
-        const auto mouse_pressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-        switch (m_construct_state)
+        switch (m_constructor.state)
         {
             case 0:
-                m_construct_state++;
-                std::cout << "state 0\n";
+                m_constructor.state++;
                 break;
             case 1:
-                if (mouse_pressed)
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
                 {
-                    std::cout << "state 1\n";
                     m_constructor.first_pos = UIHandler::GetMousePos();
-                    m_construct_state++;
+                    m_constructor.state++;
                 }
                 break;
             case 2:
-                if (mouse_pressed)
+                if (IsMouseButtonUp(MOUSE_BUTTON_LEFT))
                 {
                     m_constructor.second_pos = UIHandler::GetMousePos();
                     add_object(m_constructor.init());
-                    m_constructor.construct = false;
-                    m_construct_state = 0;
+                    m_constructor.active_construct = false;
+                    m_constructor.state = 0;
+                }
+                else
+                {
+                    const auto [x, y] = m_constructor.first_pos;
+                    const auto [width, height] = UIHandler::GetMousePos() - m_constructor.first_pos;
+                    DrawRectangleLines(x, y, width, height, RED);
                 }
                 break;
             default:
