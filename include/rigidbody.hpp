@@ -8,7 +8,7 @@ namespace pe {
 
 struct RigidBody
 {
-    RigidBody(Rectangle shape, float mass);
+    RigidBody(Rectangle shape, Vec2 pos, float mass);
 
     Rectangle shape;
     Transform curr_tf{};

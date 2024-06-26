@@ -42,6 +42,8 @@ namespace pe {
         {
             m_solver.update(obj, dt);
         }
+
+        m_solver.handle_collision(m_objects);
     }
 
     void Scene::late_update()

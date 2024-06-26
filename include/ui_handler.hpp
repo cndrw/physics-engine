@@ -19,6 +19,7 @@ namespace pe {
     class UIHandler
     {
     public:
+        static Vec2 GetMousePos();
         void add_button(Vec2 pos, int width, int height, Color color, std::function<void()> on_press);
         void update() const;
 

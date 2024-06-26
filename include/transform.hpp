@@ -2,6 +2,8 @@
 #define TRANSFORM_H
 
 #include <cstdint>
+#include <fstream>
+#include <ostream>
 
 namespace pe {
 
@@ -11,11 +13,15 @@ struct Vec2
 
     [[nodiscard]]
     Vec2 normalized() const;
+    [[nodiscard]]
+    static float distance(Vec2 v1, Vec2 v2);
     Vec2 operator*(float val) const;
     Vec2& operator+=(const Vec2& other);
     Vec2 operator/(float val) const;
     Vec2 operator+(const Vec2& other) const;
     Vec2 operator-(const Vec2& rhs) const;
+    friend std::ostream& operator<<(std::ostream& stream, const Vec2& v);
+
 };
 
 struct AABB // Alix Aligned Bounding Box

@@ -17,6 +17,7 @@ public:
     void create_scene() const;
     void update();
     void set_time_scale(float time_scale);
+    static Vec2 ToVec2(Vector2 vec);
 
 private:
     void draw_fps();

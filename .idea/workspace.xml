@@ -25,13 +25,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67012e3-b7d5-42fd-adbc-dfc9f4d99848" name="Changes" comment="init projects">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2024_14_01_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2024_14_01__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/engine.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/engine.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/rigidbody.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/rigidbody.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/scene.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/scene.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/solver.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/solver.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/transform.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/transform.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ui_handler.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ui_handler.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/solver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/solver.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,11 +131,6 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.physics_engine">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="glfw" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="physics_engine" TARGET_NAME="glfw" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -182,7 +181,12 @@
       <workItem from="1718828204257" duration="34000" />
       <workItem from="1718828293958" duration="1976000" />
       <workItem from="1718905979419" duration="3588000" />
-      <workItem from="1718993307853" duration="3690000" />
+      <workItem from="1718993307853" duration="4050000" />
+      <workItem from="1719134337459" duration="1082000" />
+      <workItem from="1719166837071" duration="1059000" />
+      <workItem from="1719254079039" duration="2688000" />
+      <workItem from="1719345312645" duration="1709000" />
+      <workItem from="1719428158476" duration="1415000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,8 @@
 #ifndef SOLVER_HPP
 #define SOLVER_HPP
 
+#include <vector>
+
 #include "transform.hpp"
 #include "rigidbody.hpp"
 
@@ -11,9 +13,13 @@ namespace pe {
     public:
         void move(RigidBody& rb, Vec2 dir) const;
         void update(RigidBody& rb, float dt) const;
+        void handle_collision(const std::vector<RigidBody>& rbs) const;
         void add_impulse(RigidBody& rb, Vec2 dir, float strength) const;
         void add_force(RigidBody& rb, Vec2 dir, float strength) const;
         void add_gravity(RigidBody& rb) const;
+
+    private:
+        bool is_colliding(const RigidBody& rb1, const RigidBody& rb2) const;
 
     private:
         const float EARTH_GRAVITY_CONST {9.91};
