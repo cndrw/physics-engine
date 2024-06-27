@@ -14,6 +14,7 @@ struct RigidBody
     Transform curr_tf{};
     Transform last_tf{};
     Vec2 force;
+    Vec2 impulse;
     float mass;
 };
 

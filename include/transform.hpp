@@ -14,12 +14,17 @@ struct Vec2
     [[nodiscard]]
     Vec2 normalized() const;
     [[nodiscard]]
+    float len() const;
+    [[nodiscard]]
     static float distance(Vec2 v1, Vec2 v2);
     Vec2 operator*(float val) const;
     Vec2& operator+=(const Vec2& other);
+    Vec2& operator-=(float val);
     Vec2 operator/(float val) const;
     Vec2 operator+(const Vec2& other) const;
     Vec2 operator-(const Vec2& rhs) const;
+    Vec2 operator-(Vec2&& rhs) const;
+    Vec2 operator-() const;
     friend std::ostream& operator<<(std::ostream& stream, const Vec2& v);
 
 };

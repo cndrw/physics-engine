@@ -13,6 +13,19 @@ namespace pe {
         return *this;
     }
 
+    Vec2& Vec2::operator-=(const float val)
+    {
+        this->x -= val;
+        this->y -= val;
+        return *this;
+    }
+
+    Vec2 Vec2::operator-() const
+    {
+       return {-this->x, -this->y};
+    }
+
+
     Vec2 Vec2::operator/( const float val) const
     {
         if (val == 0)
@@ -50,6 +63,14 @@ namespace pe {
         return res;
     }
 
+    Vec2 Vec2::operator-(Vec2&& rhs) const
+    {
+        Vec2 res = *this;
+        res.x -= rhs.x;
+        res.y -= rhs.y;
+        return res;
+    }
+
     std::ostream& operator<<(std::ostream& stream, const Vec2& v)
     {
         stream << "x: " << v.x << " y: " << v.y << " ";
@@ -59,17 +80,20 @@ namespace pe {
     float Vec2::distance(const Vec2 v1, const Vec2 v2)
     {
         const Vec2 v_distance  = v2 - v1;
-        return std::sqrt(v_distance.x * v_distance.x + v_distance.y * v_distance.y);
+        return v_distance.len();
     }
 
+    [[nodiscard]]
+    Vec2 Vec2::normalized() const
+    {
+        const auto l = len();
+        return {x / l, y / l};
+    }
 
-
-[[nodiscard]]
-Vec2 Vec2::normalized() const
-{
-    const auto len = static_cast<float>(std::sqrt(x*x + y*y));
-    return {x / len, y / len};
-}
-
+    [[nodiscard]]
+    float Vec2::len() const
+    {
+        return std::sqrt(x * x + y * y);
+    }
 
 }

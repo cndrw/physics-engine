@@ -10,6 +10,7 @@
 // interpolation and more robust fixed time system?
 // first (some?) dt that arrive for rigidbody are way out of scale (should be around 0.01s)
 // better solution with transform (maybe?)
+// proper collison resolving
 
 int main()
 {

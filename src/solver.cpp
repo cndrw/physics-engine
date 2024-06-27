@@ -18,11 +18,12 @@ namespace pe {
 
         // equation from 2 times deriving F = m * a and x = x_0 + v_0 * t + 0.5 * a * t^2
         const Vec2 velocity = (rb.curr_tf.pos - rb.last_tf.pos) / METER_TO_PIXEL;
-        const Vec2 traveled_way =  velocity + (rb.force / rb.mass / 2) * dt * dt;
+        const Vec2 traveled_way =  velocity + ((rb.force + rb.impulse) / rb.mass / 2) * dt * dt;
 
         rb.last_tf.pos = rb.curr_tf.pos;
         move(rb, traveled_way);
 
+        rb.impulse = rb.impulse.len() > 0 ? rb.impulse - Vec2{0.5, 0.5} : Vec2{0, 0};
         if (rb.curr_tf.pos.y + rb.shape.height > FLOOR)
         {
             rb.curr_tf.pos.y = FLOOR - rb.shape.height;
@@ -30,7 +31,7 @@ namespace pe {
 
     }
 
-    void Solver::handle_collision(const std::vector<RigidBody>& rbs) const
+    void Solver::handle_collision(std::vector<RigidBody>& rbs) const
     {
         for (auto& rb1 : rbs)
         {
@@ -40,7 +41,7 @@ namespace pe {
 
                 if (is_colliding(rb1, rb2))
                 {
-                    printf("collision!\n");
+                    resolve_collision(rb1, rb2);
                 }
             }
         }
@@ -58,7 +59,17 @@ namespace pe {
         return horizontal_collision && vertical_collision;
     }
 
+    void Solver::resolve_collision(RigidBody& rb1, RigidBody& rb2) const
+    {
+        const Vec2 dir = rb2.curr_tf.pos - rb1.curr_tf.pos;
+        add_impulse(rb1, -dir, 5);
+        add_impulse(rb2, dir, 5);
+    }
 
+    void Solver::add_impulse(RigidBody& rb, const Vec2 dir, const float strength) const
+    {
+        rb.impulse += dir.normalized() * strength;
+    }
 
     void Solver::move(RigidBody& rb, const Vec2 dir) const
     {
