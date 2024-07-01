@@ -16,8 +16,10 @@ using namespace std::chrono_literals;
 
 namespace pe {
 
+    constexpr auto MB {1024 * 1024};
+
     Scene::Scene()
-        : m_construction_rect({0, 0}, {0, 0}, 50)
+        : m_arena(10 * MB) ,m_construction_rect({0, 0}, {0, 0}, 50)
     {
         // pe::Rectangle r(50, 50);
         // RigidBody rb(r, {0, 0}, 50);
@@ -54,7 +56,7 @@ namespace pe {
         }
     }
 
-    void Scene::add_object(const std::shared_ptr<RigidBody>& rb)
+    void Scene::add_object(RigidBody* const rb)
     {
         std::cout << "added object\n";
         std::cout << rb->curr_tf.pos << std::endl;
@@ -86,7 +88,7 @@ namespace pe {
                 if (IsMouseButtonUp(MOUSE_BUTTON_LEFT))
                 {
                     m_constructor.second_pos = UIHandler::GetMousePos();
-                    add_object(m_constructor.init());
+                    add_object(m_constructor.init(&m_arena));
                     m_constructor.active_construct = false;
                     m_constructor.state = 0;
                 }
@@ -108,11 +110,17 @@ namespace pe {
         return true;
     }
 
-    std::unique_ptr<RigidBody> Scene::RigidbodyConstructor::init() const
+    template<class T>
+    RigidBody* Scene::RigidbodyConstructor::init(Arena<T>* arena) const
     {
         const auto [width, height] = second_pos - first_pos;
         Rectangle rect(width, height);
-        return std::make_unique<RigidBody>(rect, first_pos, 50);
+        RigidBody* rb = arena->push();
+        rb->shape = rect;
+        rb->curr_tf.pos = first_pos;
+        rb->last_tf.pos = first_pos;
+        rb->mass = 50;
+        return rb;
     }
 
 
