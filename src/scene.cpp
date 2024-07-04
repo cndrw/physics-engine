@@ -11,6 +11,7 @@
 #include "shapes.hpp"
 #include "rigidbody.hpp"
 #include "ui_handler.hpp"
+#include "arena.hpp"
 
 using namespace std::chrono_literals;
 
@@ -19,7 +20,7 @@ namespace pe {
     constexpr auto MB {1024 * 1024};
 
     Scene::Scene()
-        : m_arena(10 * MB) ,m_construction_rect({0, 0}, {0, 0}, 50)
+        : m_arena(10 * MB), m_construction_rect({0, 0}, {0, 0}, 50)
     {
         // pe::Rectangle r(50, 50);
         // RigidBody rb(r, {0, 0}, 50);
@@ -110,12 +111,11 @@ namespace pe {
         return true;
     }
 
-    template<class T>
-    RigidBody* Scene::RigidbodyConstructor::init(Arena<T>* arena) const
+    RigidBody* Scene::RigidbodyConstructor::init(Arena* arena) const
     {
         const auto [width, height] = second_pos - first_pos;
         Rectangle rect(width, height);
-        RigidBody* rb = arena->push();
+        RigidBody* rb = static_cast<RigidBody*>(arena->push(sizeof(RigidBody)));
         rb->shape = rect;
         rb->curr_tf.pos = first_pos;
         rb->last_tf.pos = first_pos;

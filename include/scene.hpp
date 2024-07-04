@@ -32,14 +32,14 @@ namespace pe {
             uint8_t state = 0;
             bool active_construct = false;
 
-            template<class T> [[nodiscard]]
-            RigidBody* init(Arena<T>*  arena) const;
+            [[nodiscard]]
+            RigidBody* init(Arena*  arena) const;
         };
 
     private:
         std::vector<RigidBody> m_objects;
         Solver m_solver;
-        Arena<RigidBody> m_arena;
+        Arena m_arena;
         RigidBody m_construction_rect;
         RigidbodyConstructor m_constructor;
 

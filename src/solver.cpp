@@ -23,7 +23,7 @@ namespace pe {
         rb.last_tf.pos = rb.curr_tf.pos;
         move(rb, traveled_way);
 
-        rb.impulse = rb.impulse.len() > 0 ? rb.impulse - Vec2{0.5, 0.5} : Vec2{0, 0};
+        rb.impulse = rb.impulse.len() > 0 ? rb.impulse - Vec2{10, 10} : Vec2{0, 0};
         if (rb.curr_tf.pos.y + rb.shape.height > FLOOR)
         {
             rb.curr_tf.pos.y = FLOOR - rb.shape.height;

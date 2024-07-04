@@ -1,6 +1,8 @@
 #include "raylib.h"
+#include <iostream>
 
 #include "engine.hpp"
+#include "arena.hpp"
 
 // 100px == 1m
 

@@ -30,8 +30,7 @@ add_executable(${PROJECT_NAME}
         src/solver.cpp
         src/ui_handler.cpp
         include/ui_handler.hpp
-        include/ui_handler.hpp
-        include/Arena.hpp
+        include/arena.hpp
         src/arena.cpp)
 #[[
         include/scene.hpp
