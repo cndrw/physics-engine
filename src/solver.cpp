@@ -17,9 +17,9 @@ namespace pe {
         if (dt >= 0.02) return;
 
         // equation from 2 times deriving F = m * a and x = x_0 + v_0 * t + 0.5 * a * t^2
-        const Vec2 velocity = (rb.curr_tf.pos - rb.last_tf.pos) / METER_TO_PIXEL;
-        const Vec2 traveled_way =  velocity + ((rb.force + rb.impulse) / rb.mass / 2) * dt * dt;
+        const Vec2 traveled_way = rb.velocity + ((rb.force + rb.impulse) / rb.mass / 2) * dt * dt;
 
+        rb.velocity = (rb.curr_tf.pos - rb.last_tf.pos) / METER_TO_PIXEL;
         rb.last_tf.pos = rb.curr_tf.pos;
         move(rb, traveled_way);
 
@@ -28,7 +28,6 @@ namespace pe {
         {
             rb.curr_tf.pos.y = FLOOR - rb.shape.height;
         }
-
     }
 
     void Solver::handle_collision(std::vector<RigidBody>& rbs) const
@@ -61,9 +60,20 @@ namespace pe {
 
     void Solver::resolve_collision(RigidBody& rb1, RigidBody& rb2) const
     {
-        const Vec2 dir = rb2.curr_tf.pos - rb1.curr_tf.pos;
-        add_impulse(rb1, -dir, 5);
-        add_impulse(rb2, dir, 5);
+        const Vec2 normal = (rb2.curr_tf.pos - rb1.curr_tf.pos).normalized();
+        const Vec2 rel_vel = rb2.velocity - rb1.velocity;
+
+        float vel_normal = Vec2::dot(rel_vel, normal);
+
+        if (vel_normal > 0) return;
+
+        float j = -vel_normal;
+        j /= 1 / rb1.mass + 1 / rb2.mass;
+        const Vec2 impulse = normal * j;
+
+
+        rb1.velocity -= impulse / rb1.mass;
+        rb2.velocity += impulse / rb2.mass;
     }
 
     void Solver::add_impulse(RigidBody& rb, const Vec2 dir, const float strength) const

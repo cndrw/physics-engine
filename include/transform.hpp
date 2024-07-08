@@ -17,9 +17,12 @@ struct Vec2
     float len() const;
     [[nodiscard]]
     static float distance(Vec2 v1, Vec2 v2);
+    [[nodiscard]]
+    static float dot(Vec2 v1, Vec2 v2);
     Vec2 operator*(float val) const;
     Vec2& operator+=(const Vec2& other);
     Vec2& operator-=(float val);
+    Vec2& operator-=(const Vec2& other);
     Vec2 operator/(float val) const;
     Vec2 operator+(const Vec2& other) const;
     Vec2 operator-(const Vec2& rhs) const;

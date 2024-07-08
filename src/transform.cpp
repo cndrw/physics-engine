@@ -13,6 +13,13 @@ namespace pe {
         return *this;
     }
 
+    Vec2 &Vec2::operator-=(const Vec2& other)
+    {
+        this->x -= other.x;
+        this->y -= other.y;
+        return *this;
+    }
+
     Vec2& Vec2::operator-=(const float val)
     {
         this->x -= val;
@@ -77,6 +84,7 @@ namespace pe {
         return stream;
     }
 
+    [[nodiscard]]
     float Vec2::distance(const Vec2 v1, const Vec2 v2)
     {
         const Vec2 v_distance  = v2 - v1;
@@ -94,6 +102,12 @@ namespace pe {
     float Vec2::len() const
     {
         return std::sqrt(x * x + y * y);
+    }
+
+    [[nodiscard]]
+    float Vec2::dot(const Vec2 v1, const Vec2 v2)
+    {
+        return v1.x * v2.x + v1.y * v2.y;
     }
 
 }

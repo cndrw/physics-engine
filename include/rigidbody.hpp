@@ -13,6 +13,7 @@ struct RigidBody
     Rectangle shape;
     Transform curr_tf{};
     Transform last_tf{};
+    Vec2 velocity;
     Vec2 force;
     Vec2 impulse;
     float mass;
