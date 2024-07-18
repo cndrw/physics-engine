@@ -16,7 +16,7 @@ struct RigidBody
     Vec2 velocity;
     Vec2 force;
     Vec2 impulse;
-    float mass;
+    float inv_mass;
 };
 
 }

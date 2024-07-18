@@ -13,7 +13,7 @@
 namespace pe {
 
     RigidBody::RigidBody(const Rectangle shape, const Vec2 pos, const float mass)
-        : shape(shape), mass(mass)
+        : shape(shape), inv_mass(1 / mass)
     {
         curr_tf.pos = pos;
         last_tf.pos = pos;

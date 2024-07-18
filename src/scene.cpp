@@ -29,7 +29,7 @@ namespace pe {
         // m_solver.add_gravity(m_objects[0]);
     }
 
-    void Scene::update()
+    void Scene::update(const float dt)
     {
         // update all objects
         if (m_constructor.active_construct)
@@ -37,16 +37,14 @@ namespace pe {
             construct_body_handler();
         }
 
-        // will be optimized in the future
-    }
-    void Scene::update_physics(const float dt)
-    {
         for (auto& obj : m_objects)
         {
             m_solver.update(obj, dt);
         }
 
         m_solver.handle_collision(m_objects);
+
+        // will be optimized in the future
     }
 
     void Scene::late_update()
@@ -114,12 +112,13 @@ namespace pe {
     RigidBody* Scene::RigidbodyConstructor::init(Arena* arena) const
     {
         const auto [width, height] = second_pos - first_pos;
-        Rectangle rect(width, height);
-        RigidBody* rb = static_cast<RigidBody*>(arena->push(sizeof(RigidBody)));
+        const float mass = width * height / 100;
+        const Rectangle rect(width, height);
+        auto* rb = static_cast<RigidBody*>(arena->push(sizeof(RigidBody)));
         rb->shape = rect;
         rb->curr_tf.pos = first_pos;
         rb->last_tf.pos = first_pos;
-        rb->mass = 50;
+        rb->inv_mass = 1.0 / mass;
         return rb;
     }
 

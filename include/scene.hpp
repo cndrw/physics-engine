@@ -20,9 +20,8 @@ namespace pe {
         void add_object(RigidBody* const rb);
         void remove_object(const RigidBody& obj);
         void clear_scene();
-        void update_physics(float dt);
         void late_update();
-        void update();
+        void update(float dt);
         bool detect_collison(const Transform& obj1, const Transform& obj2);
 
     private:

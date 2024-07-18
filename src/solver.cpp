@@ -1,10 +1,11 @@
 #include "solver.hpp"
+#include <iostream>
 
 namespace pe {
 
     void Solver::add_gravity(RigidBody& rb) const
     {
-        rb.force.y += EARTH_GRAVITY_CONST * rb.mass;
+        rb.force.y += EARTH_GRAVITY_CONST / rb.inv_mass;
     }
 
     void Solver::add_force(RigidBody& rb, const Vec2 dir, const float strength) const
@@ -14,10 +15,11 @@ namespace pe {
 
     void Solver::update(RigidBody& rb, const float dt) const
     {
-        if (dt >= 0.02) return;
+        // kif (dt >= 0.02) return;
 
         // equation from 2 times deriving F = m * a and x = x_0 + v_0 * t + 0.5 * a * t^2
-        const Vec2 traveled_way = rb.velocity + ((rb.force + rb.impulse) / rb.mass / 2) * dt * dt;
+        // std::cout << rb.inv_mass << std::endl;
+        const Vec2 traveled_way = rb.velocity + ((rb.force + rb.impulse) * rb.inv_mass / 2) * dt * dt;
 
         rb.velocity = (rb.curr_tf.pos - rb.last_tf.pos) / METER_TO_PIXEL;
         rb.last_tf.pos = rb.curr_tf.pos;
@@ -68,12 +70,16 @@ namespace pe {
         if (vel_normal > 0) return;
 
         float j = -vel_normal;
-        j /= 1 / rb1.mass + 1 / rb2.mass;
+        j /= rb1.inv_mass + rb2.inv_mass;
         const Vec2 impulse = normal * j;
 
+        float mass_sum = rb1.inv_mass + rb2.inv_mass;
 
-        rb1.velocity -= impulse / rb1.mass;
-        rb2.velocity += impulse / rb2.mass;
+        float ratio = rb1.inv_mass / mass_sum;
+        rb1.velocity -= impulse * ratio;
+
+        ratio = rb2.inv_mass / mass_sum;
+        rb2.velocity += impulse * ratio;
     }
 
     void Solver::add_impulse(RigidBody& rb, const Vec2 dir, const float strength) const

@@ -6,8 +6,10 @@
 #include "engine.hpp"
 
 #include <memory>
+#include <thread>
 
 namespace chr = std::chrono;
+using namespace std::chrono_literals;
 
 namespace pe {
 
@@ -37,15 +39,11 @@ namespace pe {
     {
 
         m_ui_handler.update();
-        m_scene.update();
 
         const auto now = chr::system_clock::now();
         const chr::duration<float> curr_dt = now - m_last_physics_frame;
-        if (curr_dt >= dt)
-        {
-            m_scene.update_physics(curr_dt.count());
-            m_last_physics_frame = now;
-        }
+        m_scene.update(curr_dt.count());
+        m_last_physics_frame = now;
 
         m_scene.late_update();
         draw_fps();
