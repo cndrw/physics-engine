@@ -21,6 +21,7 @@ namespace pe {
     private:
         bool is_colliding(const RigidBody& rb1, const RigidBody& rb2) const;
         void resolve_collision(RigidBody& rb1, RigidBody& rb2) const;
+        void positional_correction(RigidBody& rb1, RigidBody& rb2, Vec2 normal) const;
 
     private:
         const float EARTH_GRAVITY_CONST {9.91};

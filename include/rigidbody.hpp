@@ -17,6 +17,7 @@ struct RigidBody
     Vec2 force;
     Vec2 impulse;
     float inv_mass;
+    bool is_static;
 };
 
 }

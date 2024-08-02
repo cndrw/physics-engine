@@ -24,7 +24,7 @@ int main()
         BeginDrawing();
         ClearBackground(RAYWHITE);
         engine.update();
-        DrawRectangle(0, 400, 800, 100, BLUE);
+        // DrawRectangle(0, 400 - 20*5, 800, 20, BLUE);
         EndDrawing();
     }
 

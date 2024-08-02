@@ -5,6 +5,7 @@ namespace pe {
 
     void Solver::add_gravity(RigidBody& rb) const
     {
+        if (rb.is_static) return;
         rb.force.y += EARTH_GRAVITY_CONST / rb.inv_mass;
     }
 
@@ -26,10 +27,12 @@ namespace pe {
         move(rb, traveled_way);
 
         rb.impulse = rb.impulse.len() > 0 ? rb.impulse - Vec2{10, 10} : Vec2{0, 0};
+#if 0
         if (rb.curr_tf.pos.y + rb.shape.height > FLOOR)
         {
             rb.curr_tf.pos.y = FLOOR - rb.shape.height;
         }
+#endif
     }
 
     void Solver::handle_collision(std::vector<RigidBody>& rbs) const
@@ -42,6 +45,7 @@ namespace pe {
 
                 if (is_colliding(rb1, rb2))
                 {
+                    std::cout << "is colliding\n";
                     resolve_collision(rb1, rb2);
                 }
             }
@@ -65,7 +69,7 @@ namespace pe {
         const Vec2 normal = (rb2.curr_tf.pos - rb1.curr_tf.pos).normalized();
         const Vec2 rel_vel = rb2.velocity - rb1.velocity;
 
-        float vel_normal = Vec2::dot(rel_vel, normal);
+        const float vel_normal = Vec2::dot(rel_vel, normal);
 
         if (vel_normal > 0) return;
 
@@ -80,7 +84,14 @@ namespace pe {
 
         ratio = rb2.inv_mass / mass_sum;
         rb2.velocity += impulse * ratio;
+
+        std::cout << "normal: " << normal << " vel_normal: " << vel_normal << " impulse: " << impulse << std::endl;
     }
+
+    void Solver::positional_correction(RigidBody &rb1, RigidBody &rb2, const Vec2 normal) const
+    {
+    }
+
 
     void Solver::add_impulse(RigidBody& rb, const Vec2 dir, const float strength) const
     {

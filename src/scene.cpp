@@ -22,11 +22,15 @@ namespace pe {
     Scene::Scene()
         : m_arena(10 * MB), m_construction_rect({0, 0}, {0, 0}, 50)
     {
-        // pe::Rectangle r(50, 50);
-        // RigidBody rb(r, {0, 0}, 50);
-        // m_objects.push_back(rb);
-        // m_solver.add_force(m_objects[0], {1, 0}, 50);
-        // m_solver.add_gravity(m_objects[0]);
+        // create ground
+        auto* rb = static_cast<RigidBody*>(m_arena.push(sizeof(RigidBody)));
+        constexpr  int rect_height = 50;
+        rb->curr_tf.pos = {0, 400 - rect_height * 3};
+        rb->last_tf.pos = rb->curr_tf.pos;
+        rb->inv_mass = 0;
+        rb->shape = pe::Rectangle(800, rect_height);
+        rb->is_static = true;
+        add_object(rb);
     }
 
     void Scene::update(const float dt)
